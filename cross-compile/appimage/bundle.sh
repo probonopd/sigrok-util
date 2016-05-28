@@ -25,7 +25,7 @@ wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./func
 sudo apt-get update
 
 # The following are installed into the host system so that we can bundle them into the AppImage as dependencies
-sudo apt-get -y --force-yes install libqt5svg5 libqt5gui5 libboost-thread1.58.0 libboost-test1.58.0 libboost-chrono1.58.0 libboost-atomic1.58.0 libftdi1-2 libzip4
+apt-get -y --force-yes download libqt5svg5 libqt5gui5 libboost-thread1.58.0 libboost-test1.58.0 libboost-chrono1.58.0 libboost-atomic1.58.0 libftdi1-2 libzip4
 
 ########################################################################
 # Get build products from Jenkins
@@ -41,6 +41,8 @@ tar xf sigrok-firmware-fx2lafw-bin-*.tar.gz
 rm sigrok-firmware-fx2lafw-bin-*.tar.gz
 
 cd $APP.AppDir/
+
+find ../*deb -exec dpkg -x {} . \;
 
 mv ../bin/pulseview usr/bin/
 chmod a+x usr/bin/*
